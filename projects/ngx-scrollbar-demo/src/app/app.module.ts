@@ -24,10 +24,12 @@ import { ToggleFormComponent } from './example-x/toggle-form/toggle-form.compone
 import { ReachedNotifierComponent } from './example-x/reached-notifier/reached-notifier.component';
 import { SmoothScrollFormComponent } from './example-x/smooth-scroll-form/smooth-scroll-form.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
+import { ExampleLambdaComponent } from './example-lambda/example-lamba.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ExampleLambdaComponent,
     Example2Component,
     Example3Component,
     Example4Component,

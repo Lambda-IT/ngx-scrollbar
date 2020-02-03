@@ -21,10 +21,10 @@
       "dom"
     ],
     "paths": {
-      "ngx-scrollbar": [
+      "@lambda-it/ngx-scrollbar": [
         "dist/ngx-scrollbar"
       ],
-      "ngx-scrollbar/*": [
+      "@lambda-it/ngx-scrollbar/*": [
         "dist/ngx-scrollbar/*"
       ]
     }

@@ -3,9 +3,9 @@ import { Directionality } from '@angular/cdk/bidi';
 import { RtlScrollAxisType } from '@angular/cdk/platform';
 import { Observable, Subject, Subscription, Observer } from 'rxjs';
 import { filter, map, tap, distinctUntilChanged } from 'rxjs/operators';
-import { NgScrollbar } from 'ngx-scrollbar';
+// import { NgScrollbar } from '@lambda-it/ngx-scrollbar';
 // Uncomment the following line in development mode
-// import { NgScrollbar } from '../../src/public-api';
+import { NgScrollbar } from '../../src/public-api';
 
 class ReachedFunctions {
   static reachedTop(offset: number, e: any): boolean {

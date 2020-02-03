@@ -1,5 +1,5 @@
 {
-  "name": "ngx-scrollbar",
+  "name": "@lambda-it/ngx-scrollbar",
   "version": "7.1.0",
   "license": "MIT",
   "homepage": "https://ngx-scrollbar.netlify.com/",
@@ -9,7 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MurhafSousli/ngx-scrollbar"
+    "url": "https://github.com/lambda-it/ngx-scrollbar.git"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
   },
   "bugs": {
     "url": "http://github.com/murhafsousli/ngx-scrollbar/issues"
