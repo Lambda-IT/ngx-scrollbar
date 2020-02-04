@@ -22,6 +22,7 @@ export abstract class Scrollbar implements OnInit, OnDestroy {
    */
   protected viewportTrackClicked!: Subject<any>;
   protected viewportThumbClicked!: Subject<any>;
+  protected viewportThumbTouched!: Subject<any>;
 
   protected abstract get viewportScrollSize(): number;
 
@@ -44,12 +45,13 @@ export abstract class Scrollbar implements OnInit, OnDestroy {
       // Pointer events using the viewport
       this.viewportTrackClicked = new Subject<any>();
       this.viewportThumbClicked = new Subject<any>();
+      this.viewportThumbTouched = new Subject<any>();
 
       // Activate the pointer events of the viewport directive
       this.cmp.viewport.activatePointerEvents(this.destroyed);
 
       // Set streams
-      thumbDragEvent = this.viewportThumbClicked;
+      thumbDragEvent = this.viewportThumbTouched.pipe(map(a => a.touches[0]));
       trackClickEvent = this.viewportTrackClicked;
       trackHoveredEvent = this.cmp.viewport.hovered.pipe(
         // Check if track is hovered
@@ -59,6 +61,19 @@ export abstract class Scrollbar implements OnInit, OnDestroy {
         tap((hovered: boolean) => this.document.onselectstart = hovered ? () => false : null)
       );
 
+      this.cmp.viewport.touched.pipe(
+        tap((e: any) => {
+          if (e && e.touches && e.touches[0]) {
+            if (e.touches[0].clientX >= this.thumb.clientRect.left &&
+                e.touches[0].clientX <= this.thumb.clientRect.left + this.thumb.clientRect.width &&
+                e.touches[0].clientY >= this.thumb.clientRect.top &&
+                e.touches[0].clientY <= this.thumb.clientRect.top + this.thumb.clientRect.height) {
+              this.viewportThumbTouched.next(e);
+            }
+          }
+        }),
+        takeUntil(this.destroyed)
+      ).subscribe();
       this.cmp.viewport.clicked.pipe(
         tap((e: any) => {
           if (e) {

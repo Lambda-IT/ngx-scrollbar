@@ -1,7 +1,9 @@
-<div class="wrapper">
+<ng-scrollbar track="all" visibility="visible">
+<!-- <div class="wrapper"> -->
     <div class="table">
         <div *ngFor="let row of rows" class="row">
             <div *ngFor="let column of columns" class="column"> {{ row }}_{{ column }} </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
+</ng-scrollbar>

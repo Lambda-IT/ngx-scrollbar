@@ -17,6 +17,8 @@ export class ScrollViewport {
   hovered!: Observable<boolean>;
   // Stream that emits when viewport is clicked
   clicked!: Observable<any>;
+  // Stream that emits when viewport is touched
+  touched!: Observable<any>;
 
   // Get viewport size, clientHeight or clientWidth
   get clientHeight(): number {
@@ -86,6 +88,19 @@ export class ScrollViewport {
       );
       mouseDown.pipe(
         switchMap(() => mouseUp),
+        takeUntil(destroyed)
+      ).subscribe();
+    });
+
+    this.touched = new Observable((observer: Observer<any>) => {
+      const touchStart = fromEvent(this.nativeElement, 'touchstart', { passive: true }).pipe(
+        tap((e: any) => observer.next(e))
+      );
+      const touchEnd = fromEvent(this.nativeElement, 'touchend', { passive: true }).pipe(
+        tap(() => observer.next(false))
+      );
+      touchStart.pipe(
+        switchMap(() => touchEnd),
         takeUntil(destroyed)
       ).subscribe();
     });

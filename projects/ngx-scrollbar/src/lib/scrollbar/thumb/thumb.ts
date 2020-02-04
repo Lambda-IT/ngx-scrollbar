@@ -1,5 +1,5 @@
 import { Input, Output } from '@angular/core';
-import { animationFrameScheduler, of, fromEvent, Observable, Subject } from 'rxjs';
+import { animationFrameScheduler, of, fromEvent, Observable, Subject, merge } from 'rxjs';
 import { distinctUntilChanged, map, mergeMap, pluck, takeUntil, tap } from 'rxjs/operators';
 import { enableSelection, preventSelection, stopPropagation } from '../common';
 import { NgScrollbar } from '../../ng-scrollbar';
@@ -74,12 +74,26 @@ export abstract class ThumbAdapter {
       }),
     );
 
-    const dragging = fromEvent(this.document, 'mousemove', { capture: true, passive: true }).pipe(stopPropagation());
+    const dragging =
+      merge(
+        fromEvent(this.document, 'mousemove', { capture: true, passive: true }).pipe(stopPropagation()),
+        fromEvent(this.document, 'touchmove', { capture: true, passive: true }).pipe(
+          stopPropagation(),
+          map(e => e.touches[0]),
+        ),
+      );
 
-    const dragEnd = fromEvent(this.document, 'mouseup', { capture: true }).pipe(
-      stopPropagation(),
-      enableSelection(this.document),
-      tap(() => this.setDragging(false))
+    const dragEnd = merge(
+      fromEvent(this.document, 'mouseup', { capture: true }).pipe(
+          stopPropagation(),
+          enableSelection(this.document),
+          tap(() => this.setDragging(false))
+      ),
+      fromEvent<any>(this.document, 'touchend', { capture: true }).pipe(
+          stopPropagation(),
+          enableSelection(this.document),
+          tap(() => this.setDragging(false)),
+      )
     );
 
     return dragStart.pipe(

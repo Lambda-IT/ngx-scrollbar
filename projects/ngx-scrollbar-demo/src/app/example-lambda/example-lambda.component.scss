@@ -1,9 +1,14 @@
+ng-scrollbar,
 .wrapper {
     width: 80vw;
     max-width: 80vw;
     height: 80vh;
     max-height: 80vh;
     overflow: auto;
+}
+
+.table {
+    background-color: greenyellow;
 }
 
 .row {
@@ -13,4 +18,48 @@
 .column {
     width: 10vw;
     min-width: 10vw;
+}
+
+ng-scrollbar {
+    --scrollbar-padding: 0px;
+    --scrollbar-width: 12px;
+    --scrollbar-track-color: transparent;
+    --scrollbar-thumb-color: transparent;
+    --scrollbar-thumb-hover-color: transparent;
+}
+
+::ng-deep {
+    scrollbar-x {
+        height: 32px !important;
+        background-color: indianred;
+        .ng-scrollbar-track {
+            height: 32px !important;
+            border-radius: 0;
+            background-color: indianred;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                height: 12px;
+                border-radius: 6px;
+                background-color: white;
+            }
+        }
+        .ng-scrollbar-thumb {
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 10px;
+                height: 12px;
+                border-radius: 6px;
+                background-color: lightseagreen;
+            }
+        }
+    }
 }
