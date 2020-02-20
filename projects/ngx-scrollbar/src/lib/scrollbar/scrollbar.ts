@@ -48,7 +48,7 @@ export abstract class Scrollbar implements OnInit, OnDestroy {
       this.viewportThumbTouched = new Subject<any>();
 
       // Activate the pointer events of the viewport directive
-      this.cmp.viewport.activatePointerEvents(this.destroyed);
+      this.cmp.viewport.activatePointerEvents(this.cmp.viewportPropagateMouseMove, this.destroyed);
 
       // Set streams
       thumbDragEvent = this.viewportThumbTouched.pipe(map(a => a.touches[0]));
