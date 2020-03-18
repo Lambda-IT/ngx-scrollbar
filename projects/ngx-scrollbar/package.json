@@ -1,6 +1,6 @@
 {
   "name": "@lambda-it/ngx-scrollbar",
-  "version": "7.2.0-lambda-1.0.0",
+  "version": "7.2.1-beta.0-lambda-1.0.0",
   "license": "MIT",
   "homepage": "https://ngx-scrollbar.netlify.com/",
   "author": {
