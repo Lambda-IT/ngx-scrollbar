@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BidiModule } from '@angular/cdk/bidi';
-// import { NgScrollbarModule } from '@lambda-it/ngx-scrollbar';
+import { NgScrollbarModule } from '@lambda-it/ngx-scrollbar';
 // Uncomment the following line in development mode
-import { NgScrollbarModule } from '../../src/public-api';
+// import { NgScrollbarModule } from '../../src/public-api';
 import {
   NgScrollbarReachedTop,
   NgScrollbarReachedBottom,

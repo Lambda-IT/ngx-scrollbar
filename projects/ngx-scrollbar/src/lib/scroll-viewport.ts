@@ -93,12 +93,12 @@ export class ScrollViewport {
       ).subscribe();
     });
 
-    this.touched = new Observable((observer: Observer<any>) => {
+    this.touched = new Observable((subscriber: Subscriber<boolean>) => {
       const touchStart = fromEvent(this.nativeElement, 'touchstart', { passive: true }).pipe(
-        tap((e: any) => observer.next(e))
+        tap((e: any) => subscriber.next(e))
       );
       const touchEnd = fromEvent(this.nativeElement, 'touchend', { passive: true }).pipe(
-        tap(() => observer.next(false))
+        tap(() => subscriber.next(false))
       );
       touchStart.pipe(
         switchMap(() => touchEnd),
