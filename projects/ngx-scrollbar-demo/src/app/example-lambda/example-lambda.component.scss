@@ -62,4 +62,33 @@ ng-scrollbar {
             }
         }
     }
-}
+    scrollbar-y {
+        bottom: 32px !important;
+        width: 32px !important;
+        .ng-scrollbar-track::before,
+        .ng-scrollbar-thumb::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            width: 12px;
+            border-radius: 6px;
+        }
+        .ng-scrollbar-track {
+            width: 32px !important;
+            border-radius: 0;
+            background-color: indianred;
+            position: relative;
+            &::before {
+                background-color: white;
+            }
+        }
+        .ng-scrollbar-thumb {
+            position: relative;
+            &::before {
+                background-color: lightseagreen;
+            }
+        }
+    }
+} 
